@@ -21,6 +21,9 @@ jobs:
           node-version: 20
           cache: 'npm'
 
+      - name: Debug File Structure
+        run: ls -R
+
       - name: Install dependencies
         run: npm install
 
