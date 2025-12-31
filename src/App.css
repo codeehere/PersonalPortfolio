@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap');
+
+:root {
+  --primary-color: #6366f1;
+  --bg-color: #0f172a;
+  --card-bg: #1e293b;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --accent-color: #818cf8;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: 'Outfit', sans-serif;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  /* Fixed sidebar width, flexible content */
+  gap: 1.5rem;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+  align-items: start;
+  /* Align items to top */
+  min-height: 100vh;
+}
+
+.sidebar {
+  position: sticky;
+  top: 2rem;
+  height: calc(100vh - 4rem);
+  overflow-y: auto;
+  /* Hide scrollbar for cleaner look but allow scrolling */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.content-wrapper {
+  /* Flex container to hold the MainScreen component */
+  width: 100%;
+  height: calc(100vh - 4rem);
+  /* Match sidebar height logic or just 100% of grid */
+  display: flex;
+  flex-direction: column;
+}
+
+.content-placeholder h2 {
+  margin-top: 0;
+  color: var(--text-primary);
+}
+
+/* Hamburger Button */
+.hamburger-btn {
+  display: none;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1000;
+  background: rgba(30, 41, 59, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.5rem;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 40px;
+  height: 40px;
+  backdrop-filter: blur(10px);
+}
+
+.bar {
+  width: 100%;
+  height: 3px;
+  background-color: #f8fafc;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Hamburger Animation */
+.bar.open:nth-child(1) {
+  transform: translateY(11px) rotate(45deg);
+}
+
+.bar.open:nth-child(2) {
+  opacity: 0;
+}
+
+.bar.open:nth-child(3) {
+  transform: translateY(-11px) rotate(-45deg);
+}
+
+/* Sidebar Overlay */
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+  backdrop-filter: blur(2px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .main-layout {
+    grid-template-columns: 1fr;
+    /* Stack vertically on tablet/mobile */
+    padding: 0;
+    /* Remove padding to maximize space on mobile */
+    gap: 0;
+    display: block;
+    /* Use block to allow sidebar absolute positioning context if needed, or simplified layout */
+  }
+
+  .hamburger-btn {
+    display: flex;
+  }
+
+  .overlay {
+    display: block;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -320px;
+    /* Hide off-screen */
+    width: 280px;
+    height: 100vh;
+    background: #1e293b;
+    z-index: 999;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+    transition: left 0.3s ease-in-out;
+    padding: 2rem 1rem;
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .content-wrapper {
+    width: 100%;
+    height: 100vh;
+    padding-top: 50px;
+    /* Space for hamburger */
+    padding-bottom: 70px;
+    /* Space for bottom nav */
+  }
+}

@@ -1,0 +1,17 @@
+.story-container {
+    padding: 2rem;
+    color: #fff;
+    animation: fadeIn 0.5s ease-in;
+}
+
+.story-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #e2e8f0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.story-text p {
+    margin-bottom: 20px;
+}
