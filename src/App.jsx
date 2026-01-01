@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 import DscCompo from './components/DscCompo'
 import MainScreen from './components/MainScreen'
+import { checkMobileDesktopMode } from './utils/mobileCheck'
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    checkMobileDesktopMode();
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
